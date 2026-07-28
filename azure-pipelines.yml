@@ -3,13 +3,23 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger: none
+trigger:
+- none
 
 pool:
-- name: testpool
+  name: testpool
+  
+parameters:
+  - name: env
+    default: 'dev'
+    values:
+      - dev
+      - qa
+      - prod
 
-
-steps:
+variables:
+- name: backend
+  value: mishraSPN
 
 - task: TerraformInstaller@1
 inputs:
