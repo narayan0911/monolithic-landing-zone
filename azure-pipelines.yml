@@ -8,4 +8,33 @@ trigger:
 
 pool: testpool
 
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+    backendServiceArm: 'mishraSPN'
+    backendAzureRmStorageAccountName: 'mishrastorage'
+    backendAzureRmContainerName: 'tfstate'
+    backendAzureRmKey: 'monolithic.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'mishraSPN'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'mishraSPN'
+
+
+
 
