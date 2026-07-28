@@ -7,11 +7,12 @@ terraform {
   }
   backend "azurerm" {
     resource_group_name  = "stg-rg"
-    storage_account_name = "narayanstg"
+    storage_account_name = "mishrastorage"
     container_name       = "tfstate"
     key                  = "monolithic.tfstate"
   }
 }
+
 
 provider "azurerm" {
   features {}
