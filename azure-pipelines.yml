@@ -7,7 +7,7 @@ trigger:
 - none
 
 pool:
-  name: testpool
+  name: selfhostedlinuxpool
   
 parameters:
   - name: env
