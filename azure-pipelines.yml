@@ -33,7 +33,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/environment'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
     backendServiceArm: 'mishraSPN'
     backendAzureRmStorageAccountName: 'mishrastorage'
     backendAzureRmContainerName: 'tfstate'
