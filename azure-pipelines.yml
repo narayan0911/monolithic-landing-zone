@@ -26,14 +26,14 @@ steps:
 
 - task: TerraformInstaller@1
   inputs:
-    terraformVersion: '4.76.0'
+    terraformVersion: 'latest'
 
 
 - task: TerraformTask@5
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)monolithic-landing-zone/environment/${{ parameters.env }}'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
     backendServiceArm: 'mishraSPN'
     backendAzureRmStorageAccountName: 'mishrastorage'
     backendAzureRmContainerName: 'tfstate'
@@ -43,12 +43,14 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
     environmentServiceNameAzureRM: 'mishraSPN'
 
 - task: TerraformTask@5
   inputs:
     provider: 'azurerm'
     command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
     environmentServiceNameAzureRM: 'mishraSPN'
 
 
