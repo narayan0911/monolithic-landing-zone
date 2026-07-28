@@ -21,29 +21,32 @@ variables:
 - name: backend
   value: mishraSPN
 
+steps:
+
+
 - task: TerraformInstaller@1
-inputs:
+  inputs:
     terraformVersion: 'latest'
 
 
 - task: TerraformTask@5
-inputs:
+  inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+    workingDirectory: '$(System.DefaultWorkingDirectory)monolithic-landing-zone/environment/${{ parameters.env }}'
     backendServiceArm: 'mishraSPN'
     backendAzureRmStorageAccountName: 'mishrastorage'
     backendAzureRmContainerName: 'tfstate'
     backendAzureRmKey: 'monolithic.tfstate'
 
 - task: TerraformTask@5
-inputs:
+  inputs:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: 'mishraSPN'
 
 - task: TerraformTask@5
-inputs:
+  inputs:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'mishraSPN'
