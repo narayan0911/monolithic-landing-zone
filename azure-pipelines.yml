@@ -14,8 +14,7 @@ parameters:
     default: 'dev'
     values:
       - dev
-      - qa
-      - prod
+
 
 variables:
 - name: backend
@@ -34,7 +33,7 @@ steps:
     provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
-    backendServiceArm: 'mishraSPN'
+    backendServiceArm: 'narayanServiceConnection'
     backendAzureRmStorageAccountName: 'mishrastorage'
     backendAzureRmContainerName: 'tfstate'
     backendAzureRmKey: 'monolithic.tfstate'
@@ -44,14 +43,14 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
-    environmentServiceNameAzureRM: 'mishraSPN'
+    environmentServiceNameAzureRM: 'narayanServiceConnection'
 
 - task: TerraformTask@5
   inputs:
     provider: 'azurerm'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
-    environmentServiceNameAzureRM: 'mishraSPN'
+    environmentServiceNameAzureRM: 'narayanServiceConnection'
 
 
 
