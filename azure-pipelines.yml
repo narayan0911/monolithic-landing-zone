@@ -3,8 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- none
+trigger: none
+
 
 pool:
   name: infra-pool
@@ -16,9 +16,9 @@ parameters:
       - dev
 
 
-variables:
-- name: backend
-  value: mishraSPN
+# variables:
+# - name: backend
+#   value: mishraSPN
 
 steps:
 
@@ -32,7 +32,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/environment/${{ parameters.env }}'
     backendServiceArm: 'narayanServiceConnection'
     backendAzureRmStorageAccountName: 'mishrastorage'
     backendAzureRmContainerName: 'tfstate'
@@ -42,15 +42,15 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/environment/${{ parameters.env }}'
     environmentServiceNameAzureRM: 'narayanServiceConnection'
 
-- task: TerraformTask@5
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/monolithic-landing-zone/environment/${{ parameters.env }}'
-    environmentServiceNameAzureRM: 'narayanServiceConnection'
+# - task: TerraformTask@5
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'apply'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/environment/${{ parameters.env }}'
+#     environmentServiceNameAzureRM: 'narayanServiceConnection'
 
 
 
