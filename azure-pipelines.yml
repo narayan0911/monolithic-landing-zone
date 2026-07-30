@@ -7,7 +7,7 @@ trigger: none
 
 
 pool:
-  name: infra-pool
+  name: selfhostedlinuxpool
   
 parameters:
   - name: env
@@ -33,7 +33,7 @@ steps:
     provider: 'azurerm'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/environment/${{ parameters.env }}'
-    backendServiceArm: 'narayanServiceConnection'
+    backendServiceArm: 'mishraSPN'
     backendAzureRmStorageAccountName: 'mishrastorage'
     backendAzureRmContainerName: 'tfstate'
     backendAzureRmKey: 'monolithic.tfstate'
@@ -43,7 +43,7 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/environment/${{ parameters.env }}'
-    environmentServiceNameAzureRM: 'narayanServiceConnection'
+    environmentServiceNameAzureRM: 'mishraSPN'
 
 # - task: TerraformTask@5
 #   inputs:
