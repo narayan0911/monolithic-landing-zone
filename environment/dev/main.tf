@@ -3,7 +3,8 @@ module "rgs" {
   rgs    = var.rgs
 
 } 
-
+ 
+ 
 
 module "vnets" {
   depends_on = [module.rgs]
